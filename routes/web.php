@@ -14,6 +14,5 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [MainController::class, 'testGet']);
-
-Route::post('/', [MainController::class, 'testPost']);
+Route::post('/createRole', [MainController::class, 'createRole']);
+Route::put('/updateRole/{roleId}', [MainController::class, 'updateRole']);
