@@ -33,4 +33,25 @@ class MainController extends Controller
             ]
         );
     }
+
+    public function showRole(int $roleId)
+    {
+        $role = Role::findOrFail($roleId);
+        return response()->json(
+            [
+                'role' => $role
+            ]
+        );
+    }
+
+    public function showUsersByRole(int $roleId)
+    {
+        $role = Role::findOrFail($roleId);
+        $users = $role->users;
+        return response()->json(
+            [
+                'users' => $users
+            ]
+        );
+    }
 }

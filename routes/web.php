@@ -16,3 +16,5 @@ use Illuminate\Support\Facades\Route;
 
 Route::post('/createRole', [MainController::class, 'createRole']);
 Route::put('/updateRole/{roleId}', [MainController::class, 'updateRole']);
+Route::get('/showRole/{role_id}', [MainController::class, 'showRole']);
+Route::get('/showUsers/{role_id}', [MainController::class, 'showUsersByRole']);
