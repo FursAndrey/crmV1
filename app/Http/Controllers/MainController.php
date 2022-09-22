@@ -7,6 +7,17 @@ use Illuminate\Http\Request;
 
 class MainController extends Controller
 {
+    /** вариант костыля */
+    // public function __construct()
+    // {
+    //     $this->middleware('auth');
+    // }
+
+    public function allRoles()
+    {
+        return Role::get();
+    }
+
     public function createRole(Request $request)
     {
         $role = Role::create(
