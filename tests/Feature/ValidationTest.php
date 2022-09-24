@@ -8,14 +8,19 @@ use Tests\TestCase;
 
 class ValidationTest extends TestCase
 {
+    use WithFaker;
+
+    private function callLogin($email, $password)
+    {
+        return $this->post('login', ['email' => $email, 'password' => $password]);
+    }
+
     public function testWrongEmail()
     {
-        $this->seed();
-        
-        $email = 'test_email';
-        $password = $email;
+        $email = $this->faker()->word();
+        $password = $this->faker()->password();
 
-        $response = $this->post('login', ['email' => $email, 'password' => $password]);
+        $response = $this->callLogin($email, $password);
         $response->assertStatus(422);
 
         $content = $response->getContent();
@@ -24,11 +29,10 @@ class ValidationTest extends TestCase
     
     public function testHasNotPassword()
     {
-        $this->seed();
-        
-        $email = 'test_email@mail.ru';
+        $email = $this->faker()->unique()->safeEmail();
+        $password = NULL;
 
-        $response = $this->post('login', ['email' => $email]);
+        $response = $this->callLogin($email, $password);
         $response->assertStatus(422);
 
         $content = $response->getContent();
