@@ -16,11 +16,15 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::middleware(['auth'])->group(function() {
-    Route::post('/createRole', [MainController::class, 'createRole'])->name('createRole');
-    Route::put('/updateRole/{roleId}', [MainController::class, 'updateRole'])->name('updateRole');
-    Route::get('/showRole/{role_id}', [MainController::class, 'showRole'])->name('showRole');
-    Route::get('/showUsers/{role_id}', [MainController::class, 'showUsersByRole'])->name('showUsersByRole');
-    Route::get('/allRoles', [MainController::class, 'allRoles'])->name('allRoles');
+    Route::get('/home', [MainController::class, 'home'])->name('home');
+
+    Route::middleware(['checkRole:admin'])->group(function() {
+        Route::post('/createRole', [MainController::class, 'createRole'])->name('createRole');
+        Route::put('/updateRole/{roleId}', [MainController::class, 'updateRole'])->name('updateRole');
+        Route::get('/showRole/{role_id}', [MainController::class, 'showRole'])->name('showRole');
+        Route::get('/showUsers/{role_id}', [MainController::class, 'showUsersByRole'])->name('showUsersByRole');
+        Route::get('/allRoles', [MainController::class, 'allRoles'])->name('allRoles');
+    });
 });
 
 Route::post('/login', [AuthController::class, 'login'])->name('login');
