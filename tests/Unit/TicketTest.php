@@ -4,24 +4,34 @@ namespace Tests\Unit;
 
 use App\Models\Ticket;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Foundation\Testing\DatabaseTransactions;
 // use PHPUnit\Framework\TestCase;
 use Tests\TestCase;
 
 class TicketTest extends TestCase
 {
-    use RefreshDatabase;
+    // use RefreshDatabase;
+    use DatabaseTransactions;
 
-    public function test_is_new()
+    public function getTestData()
     {
-        $this->seed();
-        $ticket = Ticket::factory()->create(['status' => 0]);
-        $this->assertTrue($ticket->isNew());
+        return [
+            [0, true],
+            [1, false],
+        ];
     }
 
-    public function test_is_not_new()
+    private function createTicketWithStatus($status)
     {
-        $this->seed();
-        $ticket = Ticket::factory()->create(['status' => 1]);
-        $this->assertFalse($ticket->isNew());
+        return Ticket::factory()->create(['status' => $status]);
+    }
+
+    /**
+     *  @dataProvider getTestData
+     */
+    public function testIsNew($status, $expectedResult)
+    {
+        $ticket = $this->createTicketWithStatus($status);
+        $this->assertEquals($expectedResult, $ticket->isNew());
     }
 }

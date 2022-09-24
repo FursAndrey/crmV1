@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Role;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class MainController extends Controller
 {
@@ -16,6 +17,11 @@ class MainController extends Controller
     public function allRoles()
     {
         return Role::get();
+    }
+
+    public function home()
+    {
+        return response(Auth::user());
     }
 
     public function createRole(Request $request)
