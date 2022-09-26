@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::get('/', [MainController::class, 'welcome'])->name('welcome');
 Route::middleware(['auth'])->group(function() {
     Route::get('/home', [MainController::class, 'home'])->name('home');
 

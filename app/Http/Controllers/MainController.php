@@ -14,6 +14,11 @@ class MainController extends Controller
     //     $this->middleware('auth');
     // }
 
+    public function welcome()
+    {
+        return view('welcome');
+    }
+
     public function allRoles()
     {
         return Role::get();
