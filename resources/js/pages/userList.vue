@@ -1,13 +1,13 @@
 <template>
-    <h1>{{ title }}</h1>
-    <User v-for="(user, index) in users" v-bind:key="index" :user="user" text="some text ..."></User>
+    <h1>User List</h1>
+    <user v-for="(user, index) in users" v-bind:key="index" :user="user" text="some text ..."></user>
 </template>
 
 <script>
-    import User from './User.vue';
+    import user from '../components/user.vue';
     export default {
         components: {
-            User,
+            user,
         },
         data() {
             return {
@@ -28,12 +28,6 @@
                 ]
             }
         },
-        methods: {
-
-        },
-        computed: {
-
-        }
     }
 </script>
 

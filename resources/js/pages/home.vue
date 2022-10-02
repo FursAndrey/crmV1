@@ -13,9 +13,9 @@
     <ol>
         <todo-item v-for="item in groceryList" v-bind:todo="item" v-bind:key="item.id"></todo-item>
     </ol>
-    <ol>
+    <ul>
         <li v-for="item in groceryList">{{ item.text }}</li>
-    </ol>
+    </ul>
 </template>
 
 <script>
@@ -71,5 +71,4 @@
 </script>
 
 <style scoped>
-
 </style>
