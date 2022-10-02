@@ -16,6 +16,10 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', [MainController::class, 'welcome'])->name('welcome');
+
+Route::get('/users', [MainController::class, 'users'])->name('users');
+Route::get('/user/{id}', [MainController::class, 'user'])->name('user');
+
 Route::middleware(['auth'])->group(function() {
     Route::get('/home', [MainController::class, 'home'])->name('home');
 

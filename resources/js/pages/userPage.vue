@@ -1,17 +1,22 @@
 <template>
     <h1>User Page</h1>
-    <h2>User's name: {{ userName }}</h2>
+    <h2>User's name: {{ user.name }}</h2>
+    <h2>User's email: {{ user.email }}</h2>
 </template>
 
 <script>
+import axios from 'axios';
+
 export default{
     data() {
         return {
-            userName: null,
+            userId: null,
+            user: {},
         };
     },
     mounted() {
-        this.userName = this.$route.params.name;
+        this.userId = this.$route.params.id;
+        axios.get(`/user/${this.userId}`).then(result => this.user = result.data);
     },
 }
 </script>

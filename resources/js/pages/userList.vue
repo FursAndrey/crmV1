@@ -4,7 +4,9 @@
 </template>
 
 <script>
+    import axios from 'axios';
     import user from '../components/user.vue';
+
     export default {
         components: {
             user,
@@ -12,22 +14,14 @@
         data() {
             return {
                 title: 'CRM Help Desc',
-                users: [
-                    {
-                        first_name: 'Ivan',
-                        last_name: 'Petrov'
-                    },
-                    {
-                        first_name: 'Semen',
-                        last_name: 'Ivanov'
-                    },
-                    {
-                        first_name: 'Peter',
-                        last_name: 'Semenov'
-                    }
-                ]
+                users: []
             }
         },
+        async mounted() {
+            let result = await axios.get('/users');
+            this.users = result.data;
+            // axios.get('/users').then(result => this.users = result.data);
+        }
     }
 </script>
 
