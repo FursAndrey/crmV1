@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Role;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -75,5 +76,23 @@ class MainController extends Controller
                 'users' => $users
             ]
         );
+    }
+
+    public function users()
+    {
+        return User::get()->map(
+            function (User $user) {
+                return [
+                    'id' => $user->id,
+                    'name' => $user->name,
+                    'role' => $user->role->name,
+                ];
+            }
+        );
+    }
+
+    public function user($id)
+    {
+        return User::find($id)->only('name', 'email');
     }
 }
